@@ -1,5 +1,9 @@
 package com.seguranca.localyseg.models;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -9,6 +13,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -28,9 +33,10 @@ public class Pessoa {
 	private String email;
 	private String telefone;
 	private String acesso;
-	@CPF
 	private String cpf;
 	private String rg;
+//	@ManyToMany()
+//	private List<Espaco> espacos;
 	public long getId() {
 		return id;
 	}
@@ -73,7 +79,13 @@ public class Pessoa {
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	
+//	public List<Espaco> getEspacos() {
+//		return espacos;
+//	}
+//	public void setEspacos(List<Espaco> espacos) {
+//		this.espacos = espacos;
+//	}
+
 	
 
 }
