@@ -1,5 +1,6 @@
 package com.seguranca.localyseg.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,10 +21,10 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Table(name ="pessoa")
 @Entity(name = "pessoa")
-@Getter
 
 public class Pessoa {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +34,13 @@ public class Pessoa {
 	@Email
 	private String email;
 	private String telefone;
-	private String acesso;
+	@Column(nullable = true)
+	private Long acesso;
 	private String cpf;
 	private String rg;
 //	@ManyToMany()
-//	private List<Espaco> espacos;
+//	private Set<Espaco> espacos = new HashSet<>();
+	
 	public long getId() {
 		return id;
 	}
@@ -61,10 +65,12 @@ public class Pessoa {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getAcesso() {
+	
+	
+	public Long getAcesso() {
 		return acesso;
 	}
-	public void setAcesso(String acesso) {
+	public void setAcesso(Long acesso) {
 		this.acesso = acesso;
 	}
 	public String getCpf() {
@@ -79,12 +85,7 @@ public class Pessoa {
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-//	public List<Espaco> getEspacos() {
-//		return espacos;
-//	}
-//	public void setEspacos(List<Espaco> espacos) {
-//		this.espacos = espacos;
-//	}
+
 
 	
 

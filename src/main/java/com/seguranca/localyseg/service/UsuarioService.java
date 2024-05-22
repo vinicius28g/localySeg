@@ -74,7 +74,7 @@ public class UsuarioService {
 		pessoaRepository.save(pessoa);
 		usuarioRepository.save(usuario);
 
-		return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+		return new ResponseEntity<>(usuario, HttpStatus.OK);
 	}
 
 }

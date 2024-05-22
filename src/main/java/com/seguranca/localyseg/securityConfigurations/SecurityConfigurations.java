@@ -35,12 +35,18 @@ public class SecurityConfigurations {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
 						.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+						.requestMatchers(HttpMethod.GET, "/usuario/teste").permitAll()
 						.requestMatchers(HttpMethod.POST, "/auth/registro/aluno").permitAll()
 						.requestMatchers(HttpMethod.POST, "/pessoa/salvar").hasAnyAuthority(UserRole.ADMIN.getNome())
 						.requestMatchers(HttpMethod.POST, "/auth/registro/servidor").hasAnyAuthority(UserRole.ADMIN.getNome())
 						.requestMatchers(HttpMethod.POST, "/auth/registro/adm").hasAnyAuthority(UserRole.ADMIN.getNome())
+						.requestMatchers(HttpMethod.POST, "/auth/registro/all").hasAnyAuthority(UserRole.ADMIN.getNome())
 						.requestMatchers(HttpMethod.GET, "/usuario/listServidor").hasAnyAuthority(UserRole.SERVIDOR.getNome())
 						.requestMatchers(HttpMethod.GET, "/usuario/listAdm").hasAnyAuthority(UserRole.ADMIN.getNome())
+						.requestMatchers(HttpMethod.GET, "/usuario/atualizar/adm").hasAnyAuthority(UserRole.ADMIN.getNome())
+						.requestMatchers(HttpMethod.GET, "/usuario/atualizar/servidor").hasAnyAuthority(UserRole.ADMIN.getNome())
+						.requestMatchers(HttpMethod.GET, "/usuario/atualizar/all").hasAnyAuthority(UserRole.ADMIN.getNome())
+//						.requestMatchers(HttpMethod.POST, "/epaco/registro").hasAnyAuthority(UserRole.ADMIN.getNome())
 						.anyRequest().authenticated()
 				)
 			  .exceptionHandling(exceptionHandling -> 

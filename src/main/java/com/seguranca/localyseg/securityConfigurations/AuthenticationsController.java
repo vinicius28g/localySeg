@@ -89,6 +89,28 @@ public class AuthenticationsController {
 		return response;
 	}
 	
+	@PostMapping("/registro/all")
+	public ResponseEntity<?> registroAll(@RequestBody @Valid ResgistroDto registroUsuario){
+		if (this.usuarioRepository.findByLogin(registroUsuario.login()) != null)
+			return new ResponseEntity<>(new ErroRetorno("login já existente"), HttpStatus.CONFLICT);
+		
+//		if(registroUsuario.id()!=null && registro.id()>0) {
+//			
+//		}
+		UserRole userRole = UserRole.getTipo(registroUsuario.role());
+		String encryptePassword = new BCryptPasswordEncoder().encode(registroUsuario.pass());
+		Pessoa pessoa = new Pessoa();
+
+		pessoa = registroUsuario.pessoa();
+		var usuario = new Usuario(registroUsuario.login(), encryptePassword, userRole, pessoa);
+		
+		pessoaRepository.save(pessoa);
+		usuarioRepository.save(usuario);
+
+		return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+		
+	}
+	
 //	 public UserRole pegarUsuario() {
 //	    	//obtem a autenticação do usuario logado
 //	    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
